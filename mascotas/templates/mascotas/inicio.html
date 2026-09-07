@@ -1,0 +1,214 @@
+{% extends 'mascotas/base.html' %}
+{% load static %}
+
+{% block title %}
+Inicio | EncuentraHuellas
+{% endblock %}
+
+{% block content %}
+
+    <!-- Sección: Portada principal -->
+    <section class="hero">
+
+        <img class="hero-fondo" src="{% static 'mascotas/img/hero-fondo.png' %}" alt="">
+
+        <div class="hero-contenido">
+
+            <h1>¿Perdiste o encontraste una mascota?</h1>
+
+            <p>
+                Publica un aviso y ayuda a que más personas te ayuden a
+                reunirla con su familia.
+            </p>
+
+            <div class="hero-botones">
+                <a href="{% url 'avisos' %}" class="btn btn-principal">
+                    🔍 Buscar mascotas
+                </a>
+
+                <a href="{% url 'publicar_aviso' %}" class="btn btn-secundario">
+                    🐾 Publicar aviso
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Sección: Avisos recientes -->
+    <section class="avisos-recientes" id="avisos-recientes">
+
+        <div class="titulo-seccion">
+            <h2>🐾 Avisos recientes</h2>
+
+            <a href="{% url 'avisos' %}">
+                Ver todos los avisos →
+            </a>
+        </div>
+
+        <div class="contenedor-avisos">
+
+            {% if avisos_recientes %}
+
+                {% for aviso in avisos_recientes %}
+
+                    <article class="tarjeta-aviso">
+
+                        <!-- Imagen del aviso: si no hay foto, se conserva el espacio vacío -->
+                        <div class="imagen-aviso-contenedor">
+                            {% if aviso.imagen %}
+                                <img src="{{ aviso.imagen.url }}" alt="Foto de {{ aviso.nombre }}" class="imagen-aviso">
+                            {% endif %}
+
+                            <span class="estado-aviso estado-{{ aviso.estado }}">
+                                {{ aviso.get_estado_display }}
+                            </span>
+                        </div>
+
+                        <div class="contenido-tarjeta">
+
+                            <h3>{{ aviso.nombre }}</h3>
+
+                            <p>
+                                {{ aviso.get_especie_display }}
+                                •
+                                {{ aviso.get_sexo_display }}
+                            </p>
+
+                            <p>
+                                📍 {{ aviso.comuna }}, {{ aviso.sector }}
+                            </p>
+
+                            <a class="btn-ver-mas btn-ver-{{ aviso.estado }}" href="{% url 'detalle_aviso' aviso.id %}">
+                                Ver más →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No hay avisos publicados todavía.</p>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+    <!-- Sección: Accesos rápidos -->
+    <section class="accesos-rapidos" id="accesos-rapidos">
+
+        <div class="titulo-seccion">
+            <h2>Encuentra más rápido</h2>
+        </div>
+
+        <div class="accesos-contenedor">
+
+            <a href="{% url 'avisos' %}?especie=perro" class="acceso">
+                🐶
+                <span>Perros</span>
+            </a>
+
+            <a href="{% url 'avisos' %}?especie=gato" class="acceso">
+                🐱
+                <span>Gatos</span>
+            </a>
+
+            <a href="{% url 'avisos' %}?estado=perdido" class="acceso">
+                📍
+                <span>Perdidos</span>
+            </a>
+
+            <a href="{% url 'avisos' %}?estado=encontrado" class="acceso">
+                📅
+                <span>Encontrados</span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Sección: Cómo funciona -->
+    <section class="como-funciona" id="como-funciona">
+
+        <div class="titulo-seccion">
+            <h2>¿Cómo funciona?</h2>
+        </div>
+
+        <div class="pasos">
+
+            <div class="paso">
+                <span class="paso-icono paso-icono-verde">📝</span>
+                <h3>1. Publica un aviso</h3>
+                <p>Cuéntanos detalles de la mascota con una foto y dónde fue vista por última vez.</p>
+            </div>
+
+            <div class="paso">
+                <span class="paso-icono paso-icono-amarillo">👥</span>
+                <h3>2. La comunidad comparte</h3>
+                <p>Más personas podrán ver tu aviso y ayudarte a encontrarla.</p>
+            </div>
+
+            <div class="paso">
+                <span class="paso-icono paso-icono-verde">🔔</span>
+                <h3>3. Te contactan</h3>
+                <p>Si alguien tiene información, se comunicarán contigo.</p>
+            </div>
+
+            <div class="paso">
+                <span class="paso-icono paso-icono-coral">♡</span>
+                <h3>4. Reúnen familias</h3>
+                <p>El final que todos queremos: ¡mascota encontrada y en casa! ❤️</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    
+
+    <!-- Sección: Consejos útiles -->
+    <section class="consejos-utiles" id="consejos">
+
+        <div class="consejos-contenedor">
+
+            <div class="consejo-titulo">
+                <span>💡</span>
+                <h2>Consejos útiles</h2>
+            </div>
+
+            <div class="consejo">
+                <span>✓</span>
+                <p>Usa fotos claras y recientes de la mascota.</p>
+            </div>
+
+            <div class="consejo">
+                <span>✓</span>
+                <p>Indica con precisión el lugar donde fue vista.</p>
+            </div>
+
+            <div class="consejo">
+                <span>✓</span>
+                <p>Describe sus características físicas y comportamiento.</p>
+            </div>
+
+            <div class="consejo">
+                <span>✓</span>
+                <p>Revisa tu entorno y pregunta a vecinos del sector.</p>
+            </div>
+
+            <!-- Imagen decorativa: guardar el archivo como mascotas/static/mascotas/img/foto-consejo.png -->
+            <div class="foto-consejo" aria-label="Perritos y gatitos de EncuentraHuellas"></div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'mascotas/base.html' %}
+
+{% block title %}
+{{ aviso.nombre }} | EncuentraHuellas
+{% endblock %}
+
+{% block content %}
+
+    <section class="detalle-aviso">
+
+        <a href="{% url 'avisos' %}" class="volver-avisos">
+            ← Volver a avisos
+        </a>
+
+        <div class="detalle-contenedor">
+
+            <!-- Imagen -->
+            <div class="detalle-columna-imagen">
+
+                <div class="detalle-imagen">
+                    {% if aviso.imagen %}
+                        <img src="{{ aviso.imagen.url }}" alt="Foto de {{ aviso.nombre }}">
+                    {% else %}
+                        <div class="sin-imagen">
+                            🐾 Sin imagen
+                        </div>
+                    {% endif %}
+
+                    <span class="estado-aviso estado-{{ aviso.estado }}">
+                        🐾 {{ aviso.get_estado_display }}
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- Información -->
+            <div class="detalle-informacion">
+
+                <h1>{{ aviso.nombre }}</h1>
+
+                <div class="detalle-etiquetas">
+                    <span>🐱 {{ aviso.get_especie_display }}</span>
+                    <span>•</span>
+                    <span>♀ {{ aviso.get_sexo_display }}</span>
+                </div>
+
+                <div class="detalle-datos">
+                    <p>📍 {{ aviso.comuna }}, {{ aviso.sector }}</p>
+                    <p>📅 {{ aviso.fecha }}</p>
+                    <p>🏷️ Sector: {{ aviso.sector }}</p>
+                </div>
+
+                {% if aviso.estado != 'reunido' %}
+                    <form method="POST" action="{% url 'marcar_reunido' aviso.id %}" class="form-reunido">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-reunido">
+                            Marcar como reunido
+                        </button>
+                    </form>
+                {% endif %}
+
+
+                <!-- Descripción -->
+                <div class="detalle-tarjeta">
+                    <h2>Descripción</h2>
+                    <p>{{ aviso.descripcion }}</p>
+                </div>
+
+
+                <!-- Contacto -->
+                <div class="detalle-tarjeta">
+                    <h2>Contacto</h2>
+
+                    <div class="contacto-aviso">
+                        <span class="contacto-icono">☎</span>
+
+                        <div>
+                            <strong>{{ aviso.contacto }}</strong>
+                            <p>Comunícate para solicitar más información.</p>
+                        </div>
+                    </div>
+
+                    <div class="aviso-seguridad">
+                        🛡️ EncuentraHuellas recomienda coordinar encuentros
+                        en lugares públicos y seguros.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

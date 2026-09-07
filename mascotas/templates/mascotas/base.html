@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EncuentraHuellas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'mascotas/css/estilos.css' %}?v=4">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <nav class="navegacion">
+            <a class="marca" href="{% url 'inicio' %}">
+                <img class="marca-icono" src="{% static 'mascotas/img/huellas-naranjas.png' %}" alt="">
+                <span>
+                    <strong>Encuentra<span>Huellas</span></strong>
+                    <small>Unimos mascotas con sus familias</small>
+                </span>
+            </a>
+
+            <div class="menu-principal">
+                <a class="activo" href="{% url 'inicio' %}">Inicio</a>
+
+                <a href="{% url 'inicio' %}#avisos-recientes">
+                    Avisos
+                </a>
+
+                <a href="{% url 'inicio' %}#como-funciona">
+                    ¿Cómo funciona?
+                </a>
+
+                <a href="{% url 'inicio' %}#consejos">
+                    Consejos
+                </a>
+            </div>
+
+            <a class="btn btn-publicar" href="{% url 'publicar_aviso' %}">
+                + Publicar aviso
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer-simple">
+        <div class="footer-contenido">
+            <a class="marca footer-marca" href="{% url 'inicio' %}">
+                <img class="marca-icono" src="{% static 'mascotas/img/huellas-naranjas.png' %}" alt="">
+                <span>
+                    <strong>Encuentra<span>Huellas</span></strong>
+                    <small>Unimos mascotas con sus familias</small>
+                </span>
+            </a>
+
+            <p>© 2026 EncuentraHuellas. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

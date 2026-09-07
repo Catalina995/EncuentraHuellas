@@ -1,0 +1,195 @@
+{% extends 'mascotas/base.html' %}
+
+{% block title %}
+Avisos | EncuentraHuellas
+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-avisos">
+
+    <!-- Encabezado -->
+    <div class="encabezado-avisos">
+
+        <div>
+            <h1>Avisos de mascotas</h1>
+            <p>
+                Revisa mascotas perdidas, encontradas y reunidas con sus familias.
+            </p>
+        </div>
+
+        <a href="{% url 'publicar_aviso' %}" class="btn btn-principal">
+            + Publicar aviso
+        </a>
+
+    </div>
+
+
+    <!-- Buscador y filtros -->
+    <form method="GET" class="filtros-avisos">
+
+        <input
+            type="text"
+            name="buscar"
+            value="{{ request.GET.buscar }}"
+            placeholder="Buscar por nombre, comuna o sector..."
+        >
+
+        <select name="especie">
+
+            <option value="">Todas las especies</option>
+
+            <option value="perro"
+                {% if request.GET.especie == 'perro' %}selected{% endif %}>
+                Perros
+            </option>
+
+            <option value="gato"
+                {% if request.GET.especie == 'gato' %}selected{% endif %}>
+                Gatos
+            </option>
+
+            <option value="otro"
+                {% if request.GET.especie == 'otro' %}selected{% endif %}>
+                Otros
+            </option>
+
+        </select>
+
+
+        <select name="estado">
+
+            <option value="">Todos los estados</option>
+
+            <option value="perdido"
+                {% if request.GET.estado == 'perdido' %}selected{% endif %}>
+                Perdidos
+            </option>
+
+            <option value="encontrado"
+                {% if request.GET.estado == 'encontrado' %}selected{% endif %}>
+                Encontrados
+            </option>
+
+            <option value="reunido"
+                {% if request.GET.estado == 'reunido' %}selected{% endif %}>
+                Reunidos
+            </option>
+
+        </select>
+
+
+        <button type="submit" class="btn btn-principal">
+            🔎 Filtrar
+        </button>
+
+    </form>
+
+
+    <!-- Cantidad de resultados -->
+    <div class="resultados-avisos">
+
+        <strong>
+            {{ total_avisos }}
+            {% if total_avisos == 1 %}
+                aviso encontrado
+            {% else %}
+                avisos encontrados
+            {% endif %}
+        </strong>
+
+        {% if request.GET.buscar or request.GET.especie or request.GET.estado %}
+            <a href="{% url 'avisos' %}" class="limpiar-filtros">
+                Limpiar filtros
+            </a>
+        {% endif %}
+
+    </div>
+
+
+    <!-- Listado de avisos -->
+    <div class="grid-avisos">
+
+        {% if lista_avisos %}
+
+            {% for aviso in lista_avisos %}
+
+                <article class="tarjeta-aviso">
+
+                    <!-- Imagen -->
+                    <div class="tarjeta-imagen-contenedor">
+
+                        {% if aviso.imagen %}
+
+                            <img
+                                src="{{ aviso.imagen.url }}"
+                                alt="Foto de {{ aviso.nombre }}"
+                                class="imagen-aviso"
+                            >
+
+                        {% else %}
+
+                            <div class="aviso-sin-imagen">
+                                <span>🐾</span>
+                                <p>Sin imagen</p>
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- Estado -->
+                        <span class="estado-aviso estado-{{ aviso.estado }}">
+                            {{ aviso.get_estado_display }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- Información -->
+                    <div class="contenido-tarjeta">
+
+                        <h2>{{ aviso.nombre }}</h2>
+
+                        <p>
+                            {{ aviso.get_especie_display }}
+                            •
+                            {{ aviso.get_sexo_display }}
+                        </p>
+
+                        <p>
+                            📍 {{ aviso.comuna }}, {{ aviso.sector }}
+                        </p>
+
+                        <p>
+                            📅 {{ aviso.fecha }}
+                        </p>
+
+
+                        <a
+                            href="{% url 'detalle_aviso' aviso.id %}"
+                            class="ver-detalle-aviso"
+                        >
+                            Ver más →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="sin-resultados">
+                <span>🐾</span>
+                <h2>No encontramos avisos</h2>
+                <p>Prueba cambiando los filtros de búsqueda.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

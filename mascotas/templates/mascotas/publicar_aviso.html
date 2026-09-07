@@ -1,0 +1,104 @@
+{% extends 'mascotas/base.html' %}
+
+{% block title %}
+Publicar aviso | EncuentraHuellas
+{% endblock %}
+
+{% block content %}
+
+    <section class="publicar-aviso">
+
+    <div class="publicar-encabezado">
+        <h1>Publicar aviso</h1>
+        <p>
+            Completa los datos de la mascota para crear un nuevo aviso.
+        </p>
+    </div>
+
+    <div class="publicar-contenedor">
+
+        <form method="POST" enctype="multipart/form-data" class="formulario-aviso">
+            {% csrf_token %}
+
+            <div class="campo-formulario">
+                {{ formulario.nombre.label_tag }}
+                {{ formulario.nombre }}
+            </div>
+
+            <div class="campo-formulario">
+                {{ formulario.imagen.label_tag }}
+                {{ formulario.imagen }}
+            </div>
+
+            <div class="fila-formulario">
+
+                <div class="campo-formulario">
+                    {{ formulario.especie.label_tag }}
+                    {{ formulario.especie }}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ formulario.sexo.label_tag }}
+                    {{ formulario.sexo }}
+                </div>
+
+            </div>
+
+            <div class="fila-formulario">
+
+                <div class="campo-formulario">
+                    {{ formulario.estado.label_tag }}
+                    {{ formulario.estado }}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ formulario.fecha.label_tag }}
+                    {{ formulario.fecha }}
+                </div>
+
+            </div>
+
+            <div class="fila-formulario">
+
+                <div class="campo-formulario">
+                    {{ formulario.comuna.label_tag }}
+                    {{ formulario.comuna }}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ formulario.sector.label_tag }}
+                    {{ formulario.sector }}
+                </div>
+
+            </div>
+
+            <div class="campo-formulario">
+                {{ formulario.descripcion.label_tag }}
+                {{ formulario.descripcion }}
+            </div>
+
+            <div class="campo-formulario">
+                {{ formulario.contacto.label_tag }}
+                {{ formulario.contacto }}
+            </div>
+
+            <button type="submit" class="btn btn-principal">
+                Publicar aviso
+            </button>
+        </form>
+
+        <aside class="publicar-ayuda">
+
+            <h2>Antes de publicar</h2>
+
+            <p>📸 Usa una fotografía clara y reciente.</p>
+            <p>📍 Indica correctamente la comuna y el sector.</p>
+            <p>📝 Describe características que ayuden a reconocerla.</p>
+            <p>📞 Agrega un medio de contacto vigente.</p>
+
+        </aside>
+
+    </div>
+
+</section>
+{% endblock %}
