@@ -69,3 +69,37 @@ def marcar_reunido(request, aviso_id):
 
     return redirect('detalle_aviso', aviso_id=aviso.id)
 
+def editar_aviso(request, aviso_id):
+    aviso = get_object_or_404(Aviso, id=aviso_id)
+
+    if request.method == 'POST':
+        formulario = AvisoForm(
+            request.POST,
+            request.FILES,
+            instance=aviso
+        )
+
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('detalle_aviso', aviso_id=aviso.id)
+
+    else:
+        formulario = AvisoForm(instance=aviso)
+
+    return render(request, 'mascotas/editar_aviso.html', {
+        'formulario': formulario,
+        'aviso': aviso
+    })
+    
+    
+def eliminar_aviso(request, aviso_id):
+    aviso = get_object_or_404(Aviso, id=aviso_id)
+
+    if request.method == 'POST':
+        aviso.delete()
+        return redirect('avisos')
+
+    return render(request, 'mascotas/eliminar_aviso.html', {
+        'aviso': aviso
+    })
+

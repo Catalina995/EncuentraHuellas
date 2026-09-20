@@ -19,7 +19,8 @@ class AvisoForm(forms.ModelForm):
         ]
         
         widgets = {
-            'fecha': forms.DateInput(attrs={'type': 'date'}),
+            'fecha': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'
+            }),
             'descripcion': forms.Textarea(attrs={
                 'placeholder': 'Describe color, tamaño, collar, conducta y cualquier seña especial.'
             }),

@@ -1,0 +1,38 @@
+{% extends 'mascotas/base.html' %}
+
+{% block title %}
+Eliminar aviso | EncuentraHuellas
+{% endblock %}
+
+{% block content %}
+
+<section class="eliminar-aviso">
+
+    <div class="eliminar-contenedor">
+
+        <h1>Eliminar aviso</h1>
+
+        <p>
+            ¿Estás seguro de que deseas eliminar el aviso de
+            <strong>{{ aviso.nombre }}</strong>?
+        </p>
+
+        <p>Esta acción no se puede deshacer.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-eliminar">
+                Sí, eliminar aviso
+            </button>
+
+            <a href="{% url 'detalle_aviso' aviso.id %}" class="btn btn-secundario">
+                Cancelar
+            </a>
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

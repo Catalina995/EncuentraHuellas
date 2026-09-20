@@ -51,6 +51,14 @@
                     <p>🏷️ Sector: {{ aviso.sector }}</p>
                 </div>
 
+                <a href="{% url 'editar_aviso' aviso.id %}" class="btn btn-editar">
+                    Editar aviso
+                </a>
+
+                <a href="{% url 'eliminar_aviso' aviso.id %}" class="btn btn-eliminar">
+                    Eliminar aviso
+                </a>
+
                 {% if aviso.estado != 'reunido' %}
                     <form method="POST" action="{% url 'marcar_reunido' aviso.id %}" class="form-reunido">
                         {% csrf_token %}

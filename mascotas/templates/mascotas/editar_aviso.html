@@ -1,0 +1,106 @@
+{% extends 'mascotas/base.html' %}
+
+{% block title %}
+Editar aviso | EncuentraHuellas
+{% endblock %}
+
+{% block content %}
+
+<section class="publicar-aviso">
+
+    <div class="publicar-encabezado">
+        <h1>Editar aviso</h1>
+        <p>
+            Modifica los datos del aviso de {{ aviso.nombre }}.
+        </p>
+    </div>
+
+    <div class="publicar-contenedor">
+
+        <form method="POST" enctype="multipart/form-data" class="formulario-aviso">
+            {% csrf_token %}
+
+            <div class="campo-formulario">
+                {{ formulario.nombre.label_tag }}
+                {{ formulario.nombre }}
+            </div>
+
+            <div class="campo-formulario">
+                {{ formulario.imagen.label_tag }}
+                {{ formulario.imagen }}
+            </div>
+
+            <div class="fila-formulario">
+
+                <div class="campo-formulario">
+                    {{ formulario.especie.label_tag }}
+                    {{ formulario.especie }}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ formulario.sexo.label_tag }}
+                    {{ formulario.sexo }}
+                </div>
+
+            </div>
+
+            <div class="fila-formulario">
+
+                <div class="campo-formulario">
+                    {{ formulario.estado.label_tag }}
+                    {{ formulario.estado }}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ formulario.fecha.label_tag }}
+                    {{ formulario.fecha }}
+                </div>
+
+            </div>
+
+            <div class="fila-formulario">
+
+                <div class="campo-formulario">
+                    {{ formulario.comuna.label_tag }}
+                    {{ formulario.comuna }}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ formulario.sector.label_tag }}
+                    {{ formulario.sector }}
+                </div>
+
+            </div>
+
+            <div class="campo-formulario">
+                {{ formulario.descripcion.label_tag }}
+                {{ formulario.descripcion }}
+            </div>
+
+            <div class="campo-formulario">
+                {{ formulario.contacto.label_tag }}
+                {{ formulario.contacto }}
+            </div>
+
+            <button type="submit" class="btn btn-principal">
+                Guardar cambios
+            </button>
+
+        </form>
+
+        <aside class="publicar-ayuda">
+
+            <h2>Editar publicación</h2>
+
+            <p>📸 Puedes actualizar la fotografía de la mascota.</p>
+            <p>📍 Revisa que la comuna y el sector sean correctos.</p>
+            <p>📝 Actualiza cualquier información que haya cambiado.</p>
+            <p>🐾 Si volvió con su familia, puedes cambiar su estado a reunido.</p>
+
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}
