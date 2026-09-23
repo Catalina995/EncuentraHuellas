@@ -53,9 +53,9 @@
 
                     {% if user.is_authenticated %}
 
-                        <span>Hola, {{ user.username }}</span>
-                        <a href="#">Mis avisos</a>
-                        <form method="post" action="{% url 'logout' %}">
+                        <span class="usuario-saludo">Hola, {{ user.username }}</span>
+                        <a href="{% url 'mis_avisos' %}">Mis avisos</a>
+                        <form class="usuario-logout" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <button type="submit">Cerrar sesión</button>
                         </form>

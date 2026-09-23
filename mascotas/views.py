@@ -139,3 +139,14 @@ def registro(request):
     return render(request, 'mascotas/registro.html', {
         'formulario': formulario
     })
+
+
+@login_required
+def mis_avisos(request):
+    lista_avisos = Aviso.objects.filter(
+        usuario=request.user
+    ).order_by('-fecha_publicacion')
+
+    return render(request, 'mascotas/mis_avisos.html', {
+        'lista_avisos': lista_avisos
+    })

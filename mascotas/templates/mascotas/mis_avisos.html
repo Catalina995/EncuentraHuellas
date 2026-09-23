@@ -1,0 +1,98 @@
+{% extends 'mascotas/base.html' %}
+
+{% block title %}
+Mis avisos | EncuentraHuellas
+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-avisos">
+
+    <div class="encabezado-avisos">
+        <div>
+            <h1>Mis avisos</h1>
+            <p>
+                Revisa y administra las mascotas que has publicado.
+            </p>
+        </div>
+
+        <a href="{% url 'publicar_aviso' %}" class="btn btn-principal">
+            + Publicar aviso
+        </a>
+    </div>
+
+    <div class="grid-avisos">
+
+        {% if lista_avisos %}
+
+            {% for aviso in lista_avisos %}
+
+                <article class="tarjeta-aviso">
+
+                    <div class="tarjeta-imagen-contenedor">
+
+                        {% if aviso.imagen %}
+                            <img
+                                src="{{ aviso.imagen.url }}"
+                                alt="Foto de {{ aviso.nombre }}"
+                                class="imagen-aviso"
+                            >
+                        {% else %}
+                            <div class="aviso-sin-imagen">
+                                <span>🐾</span>
+                                <p>Sin imagen</p>
+                            </div>
+                        {% endif %}
+
+                        <span class="estado-aviso estado-{{ aviso.estado }}">
+                            {{ aviso.get_estado_display }}
+                        </span>
+
+                    </div>
+
+                    <div class="contenido-tarjeta">
+
+                        <h2>{{ aviso.nombre }}</h2>
+
+                        <p>
+                            {{ aviso.get_especie_display }}
+                            •
+                            {{ aviso.get_sexo_display }}
+                        </p>
+
+                        <p>
+                            📍 {{ aviso.comuna }}, {{ aviso.sector }}
+                        </p>
+
+                        <p>
+                            📅 {{ aviso.fecha }}
+                        </p>
+
+                        <a
+                            href="{% url 'detalle_aviso' aviso.id %}"
+                            class="ver-detalle-aviso"
+                        >
+                            Ver y administrar →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="sin-resultados">
+                <span>🐾</span>
+                <h2>Aún no tienes avisos</h2>
+                <p>Cuando publiques una mascota, aparecerá aquí.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

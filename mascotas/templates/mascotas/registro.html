@@ -1,24 +1,30 @@
 {% extends 'mascotas/base.html' %}
 
+{% block title %}
+Crear cuenta | EncuentraHuellas
+{% endblock %}
+
 {% block content %}
 
-<section class="login-seccion">
-    <div class="login-contenedor">
+<section class="auth-seccion">
+    <div class="auth-tarjeta auth-tarjeta-registro">
+
+        <div class="auth-icono" aria-hidden="true">🐾</div>
 
         <h1>Crear cuenta</h1>
         <p>Crea tu cuenta para publicar y administrar tus avisos.</p>
 
-        <form method="post">
+        <form method="post" class="auth-formulario">
             {% csrf_token %}
 
             {{ formulario.as_p }}
 
-            <button type="submit" class="btn">
+            <button type="submit" class="btn btn-principal auth-boton">
                 Crear cuenta
             </button>
         </form>
 
-        <p>
+        <p class="auth-enlace">
             ¿Ya tienes una cuenta?
             <a href="{% url 'login' %}">Iniciar sesión</a>
         </p>

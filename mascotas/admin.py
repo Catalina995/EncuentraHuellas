@@ -7,5 +7,6 @@ from .models import Aviso
 class AvisoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'usuario', 'estado', 'especie', 'comuna', 'fecha', 'fecha_publicacion')
     list_filter = ('estado', 'especie', 'sexo', 'comuna')
-    search_fields = ('nombre', 'comuna', 'sector', 'descripcion', 'contacto')
+    search_fields = ('nombre', 'comuna', 'sector', 'descripcion', 'contacto', 'usuario__username')
     ordering = ('-fecha_publicacion',)
+    readonly_fields = ('fecha_publicacion',)

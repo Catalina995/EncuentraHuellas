@@ -145,15 +145,42 @@ a {
     display: grid;
 }
 
-.usuario-desplegable a {
-    padding: 11px 12px;
-    border-radius: 8px;
-    color: #073B4C;
-    font-size: 14px;
-    font-weight: 700;
+.usuario-saludo {
+    display: block;
+    padding: 8px 10px 10px;
+    color: #5f7075;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.35;
+    border-bottom: 1px solid #E7F1EE;
 }
 
-.usuario-desplegable a:hover {
+.usuario-desplegable a,
+.usuario-logout button {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    padding: 11px 12px;
+    border: 0;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #073B4C;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+}
+
+.usuario-logout {
+    margin: 4px 0 0;
+    padding-top: 4px;
+    border-top: 1px solid #E7F1EE;
+}
+
+.usuario-desplegable a:hover,
+.usuario-logout button:hover {
     background-color: #E8FBF5;
     color: #078A6F;
 }
@@ -205,6 +232,157 @@ button, a {
 .footer-simple p {
     margin: 0;
     font-size: 14px;
+}
+
+/* =========================
+   AUTENTICACIÓN
+   ========================= */
+
+.auth-seccion {
+    min-height: calc(100vh - 78px);
+    padding: 72px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at top right, rgba(6, 214, 160, 0.16), transparent 34%),
+        linear-gradient(180deg, #F8FCFB 0%, #ECFAF6 100%);
+}
+
+.auth-tarjeta {
+    width: min(100%, 460px);
+    padding: 38px 40px 36px;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(6, 214, 160, 0.16);
+    border-radius: 20px;
+    box-shadow: 0 18px 42px rgba(7, 59, 76, 0.13);
+}
+
+.auth-tarjeta-registro {
+    width: min(100%, 540px);
+}
+
+.auth-icono {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #E8FBF5;
+    color: #06D6A0;
+    font-size: 28px;
+    box-shadow: 0 10px 24px rgba(6, 214, 160, 0.18);
+}
+
+.auth-tarjeta h1 {
+    margin: 0 0 10px;
+    color: #073B4C;
+    font-size: 34px;
+    line-height: 1.15;
+}
+
+.auth-tarjeta > p {
+    margin: 0 0 28px;
+    color: #5f7075;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.auth-formulario {
+    display: grid;
+    gap: 18px;
+}
+
+.auth-formulario p {
+    margin: 0;
+}
+
+.auth-formulario label {
+    display: block;
+    margin-bottom: 7px;
+    color: #294D59;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.auth-formulario input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #d9e5e2;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    color: #073B4C;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.auth-formulario input:focus {
+    outline: none;
+    border-color: #06D6A0;
+    box-shadow: 0 0 0 4px rgba(6, 214, 160, 0.14);
+}
+
+.auth-formulario .helptext {
+    display: block;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background-color: #F8FCFB;
+    color: #5f7075;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.auth-formulario .helptext ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+}
+
+.auth-formulario ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+}
+
+.auth-formulario .errorlist {
+    margin: 0 0 8px;
+    padding: 10px 12px;
+    list-style: none;
+    border: 1px solid rgba(239, 71, 111, 0.22);
+    border-radius: 10px;
+    background-color: #FDE8EF;
+    color: #B52B4D;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.auth-boton {
+    width: 100%;
+    margin-top: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.auth-enlace {
+    margin: 22px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid #E7F1EE;
+    color: #5f7075;
+    text-align: center;
+    font-size: 15px;
+}
+
+.auth-enlace a {
+    color: #078A6F;
+    font-weight: 800;
+}
+
+.auth-enlace a:hover {
+    color: #06D6A0;
 }
 
 
@@ -290,6 +468,8 @@ HERO - INICIO
     color: white;
     background-color: #06D6A0;
     box-shadow: 0 10px 22px rgba(6, 214, 160, 0.24);
+    padding: 12px 18px;
+    font-size: 14px;
 }
 
 .btn-editar {
@@ -1031,6 +1211,29 @@ HERO - INICIO
     }
 }
 
+@media (max-width: 560px) {
+    .auth-seccion {
+        min-height: auto;
+        padding: 46px 16px;
+        align-items: flex-start;
+    }
+
+    .auth-tarjeta,
+    .auth-tarjeta-registro {
+        width: 100%;
+        padding: 28px 22px 26px;
+        border-radius: 16px;
+    }
+
+    .auth-tarjeta h1 {
+        font-size: 29px;
+    }
+
+    .auth-tarjeta > p {
+        font-size: 15px;
+    }
+}
+
 /* =========================
    RESPONSIVE
    ========================= */
@@ -1452,15 +1655,48 @@ HERO - INICIO
 
 /* Responsive consejos */
 
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
+    .consejos-utiles {
+        overflow-x: hidden;
+    }
+
     .consejos-contenedor {
-        grid-template-columns: repeat(2, 1fr);
+        box-sizing: border-box;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         width: min(100% - 48px, 1130px);
+        max-width: 100%;
         padding: 64px 40px 150px;
     }
 
-    .consejo-titulo,
+    .consejo-titulo {
+        grid-column: 1 / -1;
+    }
+
+    .consejo {
+        min-width: 0;
+    }
+
+    .consejo p {
+        overflow-wrap: break-word;
+    }
+
     .foto-consejo {
+        right: 24px;
+        bottom: -18px;
+        width: 220px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 800px) {
+    .consejos-contenedor {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: min(100% - 48px, 1130px);
+        max-width: 100%;
+        padding: 64px 40px 150px;
+    }
+
+    .consejo-titulo {
         grid-column: 1 / -1;
     }
 
@@ -1477,12 +1713,12 @@ HERO - INICIO
     .consejos-contenedor {
         grid-template-columns: 1fr;
         width: min(100% - 32px, 1130px);
-        padding: 42px 24px 130px;
+        max-width: 100%;
+        padding: 42px 24px;
     }
 
     .foto-consejo {
-        width: 160px;
-        height: 120px;
+        display: none;
     }
 }
 /* Responsive funcionamiento */
@@ -1565,7 +1801,7 @@ HERO - INICIO
 
 @media (max-width: 430px) {
     .btn-publicar {
-        padding: 13px 16px;
+        padding: 11px 14px;
     }
 
     .usuario-boton {

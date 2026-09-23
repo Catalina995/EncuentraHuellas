@@ -53,7 +53,13 @@ Publicar aviso | EncuentraHuellas
 
                 <div class="campo-formulario">
                     {{ formulario.fecha.label_tag }}
-                    {{ formulario.fecha }}
+                    {{ formulario.fecha }}      
+
+                    {% if formulario.fecha.errors %}
+                        <div class="error-formulario">
+                            {{ formulario.fecha.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
             </div>
@@ -80,6 +86,12 @@ Publicar aviso | EncuentraHuellas
             <div class="campo-formulario">
                 {{ formulario.contacto.label_tag }}
                 {{ formulario.contacto }}
+
+                {% if formulario.contacto.errors %}
+                    <div class="error-formulario">
+                        {{ formulario.contacto.errors }}
+                    </div>
+                {% endif %}
             </div>
 
             <button type="submit" class="btn btn-principal">
