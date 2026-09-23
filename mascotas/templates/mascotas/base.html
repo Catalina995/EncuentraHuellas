@@ -40,6 +40,35 @@
             <a class="btn btn-publicar" href="{% url 'publicar_aviso' %}">
                 + Publicar aviso
             </a>
+
+            <div class="usuario-menu">
+                <button class="usuario-boton" type="button" aria-label="Opciones de usuario" aria-expanded="false">
+                    <svg class="usuario-icono" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Z"></path>
+                        <path d="M4.5 20c.78-3.03 3.77-5.25 7.5-5.25s6.72 2.22 7.5 5.25"></path>
+                    </svg>
+                </button>
+
+                <div class="usuario-desplegable">
+
+                    {% if user.is_authenticated %}
+
+                        <span>Hola, {{ user.username }}</span>
+                        <a href="#">Mis avisos</a>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Cerrar sesión</button>
+                        </form>
+
+                    {% else %}
+
+                        <a href="{% url 'login' %}">Iniciar sesión</a>
+                        <a href="{% url 'registro' %}">Crear cuenta</a>
+
+                    {% endif %}
+
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -62,5 +91,21 @@
         </div>
     </footer>
 
+    <script>
+        const usuarioMenu = document.querySelector('.usuario-menu');
+        const usuarioBoton = document.querySelector('.usuario-boton');
+
+        usuarioBoton.addEventListener('click', function () {
+            const estaAbierto = usuarioMenu.classList.toggle('abierto');
+            usuarioBoton.setAttribute('aria-expanded', estaAbierto);
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!usuarioMenu.contains(event.target)) {
+                usuarioMenu.classList.remove('abierto');
+                usuarioBoton.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
 </body>
 </html>

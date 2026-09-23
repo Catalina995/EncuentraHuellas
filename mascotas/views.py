@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 from .forms import AvisoForm
 from .models import Aviso
@@ -45,12 +48,15 @@ def detalle_aviso(request, aviso_id):
         'aviso': aviso
     })
     
+@login_required
 def publicar_aviso(request):
     if request.method == 'POST':
         formulario = AvisoForm(request.POST, request.FILES)
 
         if formulario.is_valid():
-            formulario.save()
+            aviso = formulario.save(commit=False)
+            aviso.usuario = request.user
+            aviso.save()
             return redirect('avisos')
     else:
         formulario = AvisoForm()
@@ -60,17 +66,27 @@ def publicar_aviso(request):
     })
 
 
+@login_required
+@require_POST
 def marcar_reunido(request, aviso_id):
-    aviso = get_object_or_404(Aviso, id=aviso_id)
+    aviso = get_object_or_404(
+        Aviso,
+        id=aviso_id,
+        usuario=request.user
+    )
 
-    if request.method == 'POST':
-        aviso.estado = 'reunido'
-        aviso.save(update_fields=['estado'])
+    aviso.estado = 'reunido'
+    aviso.save(update_fields=['estado'])
 
     return redirect('detalle_aviso', aviso_id=aviso.id)
 
+@login_required
 def editar_aviso(request, aviso_id):
-    aviso = get_object_or_404(Aviso, id=aviso_id)
+    aviso = get_object_or_404(
+        Aviso,
+        id=aviso_id,
+        usuario=request.user
+    )
 
     if request.method == 'POST':
         formulario = AvisoForm(
@@ -92,8 +108,13 @@ def editar_aviso(request, aviso_id):
     })
     
     
+@login_required
 def eliminar_aviso(request, aviso_id):
-    aviso = get_object_or_404(Aviso, id=aviso_id)
+    aviso = get_object_or_404(
+        Aviso,
+        id=aviso_id,
+        usuario=request.user
+    )
 
     if request.method == 'POST':
         aviso.delete()
@@ -103,3 +124,18 @@ def eliminar_aviso(request, aviso_id):
         'aviso': aviso
     })
 
+
+def registro(request):
+    if request.method == 'POST':
+        formulario = UserCreationForm(request.POST)
+
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('login')
+
+    else:
+        formulario = UserCreationForm()
+
+    return render(request, 'mascotas/registro.html', {
+        'formulario': formulario
+    })

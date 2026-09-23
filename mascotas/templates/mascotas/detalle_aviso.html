@@ -50,7 +50,7 @@
                     <p>📅 {{ aviso.fecha }}</p>
                     <p>🏷️ Sector: {{ aviso.sector }}</p>
                 </div>
-
+            {% if user.is_authenticated and aviso.usuario == user %}
                 <a href="{% url 'editar_aviso' aviso.id %}" class="btn btn-editar">
                     Editar aviso
                 </a>
@@ -67,6 +67,7 @@
                         </button>
                     </form>
                 {% endif %}
+            {% endif %}
 
 
                 <!-- Descripción -->
