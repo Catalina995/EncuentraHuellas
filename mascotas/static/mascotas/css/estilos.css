@@ -1264,7 +1264,8 @@ HERO - INICIO
 /* Responsive acceso rápidos */
 
 @media (max-width: 800px) {
-    .accesos-rapidos {
+    .accesos-rapidos .titulo-seccion,
+    .accesos-rapidos .accesos-contenedor {
         width: min(100% - 48px, 1130px);
     }
 
@@ -1274,7 +1275,8 @@ HERO - INICIO
 }
 
 @media (max-width: 500px) {
-    .accesos-rapidos {
+    .accesos-rapidos .titulo-seccion,
+    .accesos-rapidos .accesos-contenedor {
         width: min(100% - 32px, 1130px);
     }
 
@@ -1303,9 +1305,11 @@ HERO - INICIO
     grid-template-columns: 1.15fr repeat(4, 1fr);
     align-items: center;
     gap: 22px;
-    width: min(1130px, calc(100% - 64px));
+    box-sizing: border-box;
+    width: min(1440px, calc(100% - 64px));
     margin: 0 auto;
-    padding: 80px 240px 80px 70px;
+    padding: 80px 360px 80px 70px;
+    overflow: hidden;
     border-radius: 14px;
     background: linear-gradient(90deg, #FFFFFF 0%, #F8FCFB 100%);
     box-shadow: 0 8px 20px rgba(6, 214, 160, 0.12);
@@ -1357,10 +1361,10 @@ HERO - INICIO
 
 .foto-consejo {
     position: absolute;
-    right: -200px;
-    bottom: -20px;
-    width: 550px;
-    height: 300px;
+    right: 30px;
+    bottom: 0;
+    width: 330px;
+    height: 230px;
     background-image: url("../img/foto-consejo.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -1656,12 +1660,7 @@ HERO - INICIO
 /* Responsive consejos */
 
 @media (max-width: 1100px) {
-    .consejos-utiles {
-        overflow-x: hidden;
-    }
-
     .consejos-contenedor {
-        box-sizing: border-box;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         width: min(100% - 48px, 1130px);
         max-width: 100%;
@@ -1724,7 +1723,8 @@ HERO - INICIO
 /* Responsive funcionamiento */
 
 @media (max-width: 900px) {
-    .como-funciona {
+    .como-funciona .titulo-seccion,
+    .como-funciona .pasos {
         width: min(100% - 48px, 1130px);
     }
 
@@ -1735,7 +1735,8 @@ HERO - INICIO
 }
 
 @media (max-width: 700px) {
-    .como-funciona {
+    .como-funciona .titulo-seccion,
+    .como-funciona .pasos {
         width: min(100% - 32px, 1130px);
     }
 
