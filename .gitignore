@@ -17,7 +17,7 @@ media/
 .env
 .env.*
 !.env.example
-CREDENCIALES_PROFESOR.txt
+MANUAL_INSTALACION_Y_USO_ENCUENTRAHUELLAS.txt
 
 # Archivos del editor
 .vscode/
