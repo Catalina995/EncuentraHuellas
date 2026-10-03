@@ -148,3 +148,32 @@ Las sugerencias generadas fueron revisadas, adaptadas y validadas antes de incor
 **Catalina Manríquez**
 
 Proyecto académico desarrollado con fines educativos.
+
+## API RESTful
+
+La aplicación expone el recurso Aviso mediante Django REST Framework.
+
+### Endpoints
+
+| Método | Endpoint          | Descripción                             |
+| ------ | ----------------- | --------------------------------------- |
+| GET    | /api/avisos/      | Lista todos los avisos                  |
+| POST   | /api/avisos/      | Crea un aviso autenticado               |
+| GET    | /api/avisos/<id>/ | Muestra el detalle de un aviso          |
+| PUT    | /api/avisos/<id>/ | Actualiza completamente un aviso propio |
+| PATCH  | /api/avisos/<id>/ | Actualiza parcialmente un aviso propio  |
+| DELETE | /api/avisos/<id>/ | Elimina un aviso propio                 |
+
+### Seguridad
+
+- Los avisos pueden ser consultados públicamente.
+- Solo usuarios autenticados pueden crear avisos.
+- Solo el usuario dueño del aviso puede editarlo o eliminarlo.
+- Los avisos creados desde la API se asocian automáticamente al usuario autenticado.
+
+### Pruebas realizadas
+
+- GET /api/avisos/ devuelve respuesta JSON con HTTP 200.
+- GET /api/avisos/1/ devuelve el detalle de un aviso.
+- POST /api/avisos/ permite crear aviso con usuario autenticado.
+- Un usuario distinto no puede editar ni eliminar avisos ajenos.
