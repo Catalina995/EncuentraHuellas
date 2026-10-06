@@ -57,6 +57,8 @@ El panel incorpora:
 
 - Python 3.12
 - Django
+- Django REST Framework
+- Token Authentication
 - HTML y CSS
 - JavaScript
 - PostgreSQL
@@ -151,12 +153,13 @@ Proyecto académico desarrollado con fines educativos.
 
 ## API RESTful
 
-La aplicación expone el recurso Aviso mediante Django REST Framework.
+La aplicación expone el recurso Aviso mediante Django REST Framework y permite autenticación por token para probar acciones protegidas desde herramientas como Postman.
 
 ### Endpoints
 
 | Método | Endpoint          | Descripción                             |
 | ------ | ----------------- | --------------------------------------- |
+| POST   | /api/login/       | Devuelve un token de autenticación      |
 | GET    | /api/avisos/      | Lista todos los avisos                  |
 | POST   | /api/avisos/      | Crea un aviso autenticado               |
 | GET    | /api/avisos/<id>/ | Muestra el detalle de un aviso          |
@@ -164,16 +167,45 @@ La aplicación expone el recurso Aviso mediante Django REST Framework.
 | PATCH  | /api/avisos/<id>/ | Actualiza parcialmente un aviso propio  |
 | DELETE | /api/avisos/<id>/ | Elimina un aviso propio                 |
 
+### Autenticación por token
+
+Para obtener un token se debe enviar una solicitud `POST` a `/api/login/` con usuario y contraseña en formato JSON:
+
+```json
+{
+  "username": "usuario",
+  "password": "contraseña"
+}
+```
+
+La respuesta incluye el token, el nombre de usuario y si el usuario es administrador:
+
+```json
+{
+  "token": "TOKEN_GENERADO",
+  "usuario": "usuario",
+  "es_administrador": true
+}
+```
+
+Para crear, editar o eliminar avisos desde la API, se debe enviar el token en el header `Authorization`:
+
+```text
+Authorization: Token TOKEN_GENERADO
+```
+
 ### Seguridad
 
 - Los avisos pueden ser consultados públicamente.
 - Solo usuarios autenticados pueden crear avisos.
 - Solo el usuario dueño del aviso puede editarlo o eliminarlo.
 - Los avisos creados desde la API se asocian automáticamente al usuario autenticado.
+- La autenticación por token permite probar la API desde Postman sin usar el formulario web de inicio de sesión.
 
 ### Pruebas realizadas
 
+- POST /api/login/ devuelve un token de autenticación con HTTP 200.
 - GET /api/avisos/ devuelve respuesta JSON con HTTP 200.
 - GET /api/avisos/1/ devuelve el detalle de un aviso.
-- POST /api/avisos/ permite crear aviso con usuario autenticado.
+- POST /api/avisos/ permite crear aviso con usuario autenticado mediante token.
 - Un usuario distinto no puede editar ni eliminar avisos ajenos.
